@@ -1,6 +1,6 @@
 Estimate
 ==========
 
-.. automodule:: ttools.estimate
+.. automodule:: rraider.estimate
    :members:
 

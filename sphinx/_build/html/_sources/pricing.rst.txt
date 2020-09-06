@@ -1,6 +1,6 @@
 Pricing
 ==========
 
-.. automodule:: ttools.pricing
+.. automodule:: rraider.pricing
    :members:
 

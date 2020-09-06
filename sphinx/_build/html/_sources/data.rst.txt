@@ -1,6 +1,6 @@
 Data
 ==========
 
-.. automodule:: ttools.data
+.. automodule:: rraider.data
    :members: get
 

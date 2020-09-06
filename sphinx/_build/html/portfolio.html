@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Portfolio &mdash; ttools  documentation</title>
+  <title>Portfolio &mdash; rraider  documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Risk" href="risk.html" />
+    <link rel="next" title="Pricing" href="pricing.html" />
     <link rel="prev" title="Simulate" href="simulate.html" /> 
 </head>
 
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
           
 
           
@@ -83,9 +83,11 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimate.html">Estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulate.html">Simulate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pricing.html">Pricing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="risk.html">Risk</a></li>
 </ul>
 
@@ -102,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ttools</a>
+          <a href="index.html">rraider</a>
         
       </nav>
 
@@ -152,27 +154,27 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ttools.portfolio">
-<span id="portfolio"></span><h1>Portfolio<a class="headerlink" href="#module-ttools.portfolio" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-rraider.portfolio">
+<span id="portfolio"></span><h1>Portfolio<a class="headerlink" href="#module-rraider.portfolio" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="ttools.portfolio.basketHedgeAnalyze">
-<code class="sig-prename descclassname">ttools.portfolio.</code><code class="sig-name descname">basketHedgeAnalyze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">positions</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.portfolio.basketHedgeAnalyze" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.portfolio.basketHedgeAnalyze">
+<code class="sig-prename descclassname">rraider.portfolio.</code><code class="sig-name descname">basketHedgeAnalyze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df</span></em>, <em class="sig-param"><span class="n">positions</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.portfolio.basketHedgeAnalyze" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct some additional set of positions to hedge a given set of positions.
 df -&gt; pd.DataFrame, price timeseries
 positions-&gt; pd.Series, index is position, value is size in $$$</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.portfolio.basketVariance">
-<code class="sig-prename descclassname">ttools.portfolio.</code><code class="sig-name descname">basketVariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span></em>, <em class="sig-param"><span class="n">weights</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.portfolio.basketVariance" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.portfolio.basketVariance">
+<code class="sig-prename descclassname">rraider.portfolio.</code><code class="sig-name descname">basketVariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span></em>, <em class="sig-param"><span class="n">weights</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.portfolio.basketVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the variance a basket, weighted by ‘weights’.</p>
 <p>‘samples’ should have shape (k,n) for k variables with n samples each.
 ‘weights’ should be vector of shape (k,)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.portfolio.minVarHedgeRatio">
-<code class="sig-prename descclassname">ttools.portfolio.</code><code class="sig-name descname">minVarHedgeRatio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df1</span></em>, <em class="sig-param"><span class="n">df2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.portfolio.minVarHedgeRatio" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.portfolio.minVarHedgeRatio">
+<code class="sig-prename descclassname">rraider.portfolio.</code><code class="sig-name descname">minVarHedgeRatio</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df1</span></em>, <em class="sig-param"><span class="n">df2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.portfolio.minVarHedgeRatio" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes a simple minimum-variance hedge ratio.</p>
 <dl class="simple">
 <dt>Provide 2 pandas series, df1 &amp; df2,</dt><dd><p>and I will provide the ratio units allocated in  df2 to hedge each unit of df1</p>
@@ -181,15 +183,15 @@ positions-&gt; pd.Series, index is position, value is size in $$$</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.portfolio.minimumVariance">
-<code class="sig-prename descclassname">ttools.portfolio.</code><code class="sig-name descname">minimumVariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.portfolio.minimumVariance" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.portfolio.minimumVariance">
+<code class="sig-prename descclassname">rraider.portfolio.</code><code class="sig-name descname">minimumVariance</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">samples</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.portfolio.minimumVariance" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the weights that minimize the variance among all baskets.</p>
 <p>Let samples have shape (k,n) as usual. K variables, n samples.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.portfolio.singleHedgeAnalyze">
-<code class="sig-prename descclassname">ttools.portfolio.</code><code class="sig-name descname">singleHedgeAnalyze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df1</span></em>, <em class="sig-param"><span class="n">df2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.portfolio.singleHedgeAnalyze" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.portfolio.singleHedgeAnalyze">
+<code class="sig-prename descclassname">rraider.portfolio.</code><code class="sig-name descname">singleHedgeAnalyze</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">df1</span></em>, <em class="sig-param"><span class="n">df2</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.portfolio.singleHedgeAnalyze" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given two pd.Series objects,
 compute the hedge ratio, and variance improvement information.
 Returns dictionary</p>
@@ -205,7 +207,7 @@ Returns dictionary</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="risk.html" class="btn btn-neutral float-right" title="Risk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="pricing.html" class="btn btn-neutral float-right" title="Pricing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="simulate.html" class="btn btn-neutral float-left" title="Simulate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

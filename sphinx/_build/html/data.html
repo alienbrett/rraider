@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Data &mdash; ttools  documentation</title>
+  <title>Data &mdash; rraider  documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
           
 
           
@@ -104,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ttools</a>
+          <a href="index.html">rraider</a>
         
       </nav>
 
@@ -154,11 +154,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ttools.data">
-<span id="data"></span><h1>Data<a class="headerlink" href="#module-ttools.data" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-rraider.data">
+<span id="data"></span><h1>Data<a class="headerlink" href="#module-rraider.data" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="ttools.data.get">
-<code class="sig-prename descclassname">ttools.data.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">cache</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.data.get" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.data.get">
+<code class="sig-prename descclassname">rraider.data.</code><code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">keyword</span></em>, <em class="sig-param"><span class="n">cache</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.data.get" title="Permalink to this definition">¶</a></dt>
 <dd><p>Acquires some data source.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -173,9 +173,11 @@ Cache invalidates each day, so results are alway from today.</p></li>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">ttools</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tsy&#39;</span><span class="p">)</span>
-<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span> <span class="n">ttools</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tsy&#39;</span><span class="p">)</span> <span class="p">)</span>
 <span class="c1"># pandas.core.frame.DataFrame</span>
+
+<span class="n">ttools</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;tsy&#39;</span><span class="p">,</span> <span class="n">floatDates</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="c1"># This one will have column names as the number of years until maturity</span>
 </pre></div>
 </div>
 </dd></dl>

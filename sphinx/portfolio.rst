@@ -1,6 +1,6 @@
 Portfolio
 ==========
 
-.. automodule:: ttools.portfolio
+.. automodule:: rraider.portfolio
    :members:
 

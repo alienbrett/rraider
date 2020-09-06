@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Pricing &mdash; ttools  documentation</title>
+  <title>Pricing &mdash; rraider  documentation</title>
   
 
   
@@ -35,7 +35,9 @@
 
     
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Risk" href="risk.html" />
+    <link rel="prev" title="Portfolio" href="portfolio.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -49,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
           
 
           
@@ -80,10 +82,12 @@
               
             
             
-              <ul>
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimate.html">Estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulate.html">Simulate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio.html">Portfolio</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Pricing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="risk.html">Risk</a></li>
 </ul>
 
@@ -100,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ttools</a>
+          <a href="index.html">rraider</a>
         
       </nav>
 
@@ -150,24 +154,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ttools.pricing">
-<span id="pricing"></span><h1>Pricing<a class="headerlink" href="#module-ttools.pricing" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-rraider.pricing">
+<span id="pricing"></span><h1>Pricing<a class="headerlink" href="#module-rraider.pricing" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="ttools.pricing.annuityPrice">
-<code class="sig-prename descclassname">ttools.pricing.</code><code class="sig-name descname">annuityPrice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cashFlow</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">nPayments</span></em>, <em class="sig-param"><span class="n">timeOffset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.pricing.annuityPrice" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.pricing.annuityPrice">
+<code class="sig-prename descclassname">rraider.pricing.</code><code class="sig-name descname">annuityPrice</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cashFlow</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">nPayments</span></em>, <em class="sig-param"><span class="n">timeOffset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.pricing.annuityPrice" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sum of the current values of all cash flows from annuity.</p>
 <p>Has some problems where time-&gt; infinity, and where riskFree=0</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.pricing.bond">
-<code class="sig-prename descclassname">ttools.pricing.</code><code class="sig-name descname">bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">par</span></em>, <em class="sig-param"><span class="n">coupon</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">nPayments</span></em>, <em class="sig-param"><span class="n">timeOffset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.pricing.bond" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.pricing.bond">
+<code class="sig-prename descclassname">rraider.pricing.</code><code class="sig-name descname">bond</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">par</span></em>, <em class="sig-param"><span class="n">coupon</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">nPayments</span></em>, <em class="sig-param"><span class="n">timeOffset</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.pricing.bond" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sum of the current values of all cash flows from bond.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.pricing.discount">
-<code class="sig-prename descclassname">ttools.pricing.</code><code class="sig-name descname">discount</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cashFlow</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">time</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.pricing.discount" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.pricing.discount">
+<code class="sig-prename descclassname">rraider.pricing.</code><code class="sig-name descname">discount</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">cashFlow</span></em>, <em class="sig-param"><span class="n">riskFree</span></em>, <em class="sig-param"><span class="n">time</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.pricing.discount" title="Permalink to this definition">¶</a></dt>
 <dd><p>Discount a single cash flow to the present.</p>
 </dd></dl>
 
@@ -178,6 +182,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="risk.html" class="btn btn-neutral float-right" title="Risk" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="portfolio.html" class="btn btn-neutral float-left" title="Portfolio" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>
