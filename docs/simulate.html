@@ -1,0 +1,273 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Simulate &mdash; ttools  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+        <script src="static/language_data.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Portfolio" href="portfolio.html" />
+    <link rel="prev" title="Estimate" href="estimate.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="estimate.html">Estimate</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Simulate</a></li>
+<li class="toctree-l1"><a class="reference internal" href="portfolio.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="risk.html">Risk</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">ttools</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Simulate</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/simulate.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-ttools.simulate">
+<span id="simulate"></span><h1>Simulate<a class="headerlink" href="#module-ttools.simulate" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="ttools.simulate.brownianSim">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">brownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.brownianSim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates brownian motion over some interval.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> – Position at t=0</p></li>
+<li><p><strong>mu</strong> – werner process drift, per T=1</p></li>
+<li><p><strong>sigma</strong> – werner process stdev, per T=1</p></li>
+<li><p><strong>T</strong> – units of time to simulate</p></li>
+<li><p><strong>N</strong> – simulation Resolution per unit of T</p></li>
+<li><p><strong>M</strong> – trials to run</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ttools.simulate.countToCDF">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">countToCDF</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">forward</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.countToCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>Turn set of counts into a PDF.
+Let ys have the shape (n,)
+forward argument to True specifies reverse-direction CDF</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ttools.simulate.fullExecEstimator">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">fullExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="n">spread</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.fullExecEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build estimator objects that predict the probablitity of order execution at given level,
+given bid/ask spread.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ttools.simulate.geomBrownianSim">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">geomBrownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.geomBrownianSim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates log-normal brownian motion.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ttools.simulate.minsAndMaxs">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">minsAndMaxs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.minsAndMaxs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the global mins and maxes for a time series of prices.
+Be sure that y’s have shape (nSims, timeSteps)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="ttools.simulate.simpleExecEstimator">
+<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">simpleExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.simpleExecEstimator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate execution functions, assuming no bid/ask spread.</p>
+<dl class="simple">
+<dt>Returns two functions, f(p) and g(p) that will return the price at which a</dt><dd><p>stock has probability p of executing over timespan T.</p>
+</dd>
+</dl>
+<p>‘f’ describes price of buys (measuring minimums) and ‘g’ describes price of sells (measuring maximums).</p>
+<p>‘Simulations’ is a numpy matrix describing some set of simulations, with shape (n sims, path length).</p>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="portfolio.html" class="btn btn-neutral float-right" title="Portfolio" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="estimate.html" class="btn btn-neutral float-left" title="Estimate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Brett Graves
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
