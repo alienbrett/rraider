@@ -1,6 +1,6 @@
 Risk
 =========
 
-.. autoclass:: ttools.risk.BracketPosition
+.. autoclass:: rraider.risk.BracketPosition
    :members:
 

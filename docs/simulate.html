@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Simulate &mdash; ttools  documentation</title>
+  <title>Simulate &mdash; rraider  documentation</title>
   
 
   
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
           
 
           
@@ -83,9 +83,11 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimate.html">Estimate</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Simulate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pricing.html">Pricing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="risk.html">Risk</a></li>
 </ul>
 
@@ -102,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ttools</a>
+          <a href="index.html">rraider</a>
         
       </nav>
 
@@ -152,11 +154,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ttools.simulate">
-<span id="simulate"></span><h1>Simulate<a class="headerlink" href="#module-ttools.simulate" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-rraider.simulate">
+<span id="simulate"></span><h1>Simulate<a class="headerlink" href="#module-rraider.simulate" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="ttools.simulate.brownianSim">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">brownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.brownianSim" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.brownianSim">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">brownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.brownianSim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates brownian motion over some interval.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -173,36 +175,36 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.simulate.countToCDF">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">countToCDF</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">forward</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.countToCDF" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.countToCDF">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">countToCDF</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em>, <em class="sig-param"><span class="n">resolution</span><span class="o">=</span><span class="default_value">100</span></em>, <em class="sig-param"><span class="n">forward</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.countToCDF" title="Permalink to this definition">¶</a></dt>
 <dd><p>Turn set of counts into a PDF.
 Let ys have the shape (n,)
 forward argument to True specifies reverse-direction CDF</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.simulate.fullExecEstimator">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">fullExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="n">spread</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.fullExecEstimator" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.fullExecEstimator">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">fullExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="n">spread</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.fullExecEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build estimator objects that predict the probablitity of order execution at given level,
 given bid/ask spread.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.simulate.geomBrownianSim">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">geomBrownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.geomBrownianSim" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.geomBrownianSim">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">geomBrownianSim</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">T</span></em>, <em class="sig-param"><span class="n">N</span></em>, <em class="sig-param"><span class="n">M</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.geomBrownianSim" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates log-normal brownian motion.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.simulate.minsAndMaxs">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">minsAndMaxs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.minsAndMaxs" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.minsAndMaxs">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">minsAndMaxs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ys</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.minsAndMaxs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Finds the global mins and maxes for a time series of prices.
 Be sure that y’s have shape (nSims, timeSteps)</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.simulate.simpleExecEstimator">
-<code class="sig-prename descclassname">ttools.simulate.</code><code class="sig-name descname">simpleExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.simulate.simpleExecEstimator" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.simulate.simpleExecEstimator">
+<code class="sig-prename descclassname">rraider.simulate.</code><code class="sig-name descname">simpleExecEstimator</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">simulations</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.simulate.simpleExecEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate execution functions, assuming no bid/ask spread.</p>
 <dl class="simple">
 <dt>Returns two functions, f(p) and g(p) that will return the price at which a</dt><dd><p>stock has probability p of executing over timespan T.</p>

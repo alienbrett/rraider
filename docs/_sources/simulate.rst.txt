@@ -1,6 +1,6 @@
 Simulate
 ===========
 
-.. automodule:: ttools.simulate
+.. automodule:: rraider.simulate
    :members:
 

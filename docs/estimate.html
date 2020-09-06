@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Estimate &mdash; ttools  documentation</title>
+  <title>Estimate &mdash; rraider  documentation</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Simulate" href="simulate.html" />
-    <link rel="prev" title="Contents" href="index.html" /> 
+    <link rel="prev" title="Data" href="data.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -51,7 +51,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home" alt="Documentation Home"> ttools
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
           
 
           
@@ -83,9 +83,11 @@
             
             
               <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="data.html">Data</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Estimate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulate.html">Simulate</a></li>
 <li class="toctree-l1"><a class="reference internal" href="portfolio.html">Portfolio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pricing.html">Pricing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="risk.html">Risk</a></li>
 </ul>
 
@@ -102,7 +104,7 @@
       <nav class="wy-nav-top" aria-label="top navigation">
         
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="index.html">ttools</a>
+          <a href="index.html">rraider</a>
         
       </nav>
 
@@ -152,11 +154,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-ttools.estimate">
-<span id="estimate"></span><h1>Estimate<a class="headerlink" href="#module-ttools.estimate" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-rraider.estimate">
+<span id="estimate"></span><h1>Estimate<a class="headerlink" href="#module-rraider.estimate" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="ttools.estimate.volParkinson">
-<code class="sig-prename descclassname">ttools.estimate.</code><code class="sig-name descname">volParkinson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">highs</span></em>, <em class="sig-param"><span class="n">lows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.estimate.volParkinson" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.estimate.volParkinson">
+<code class="sig-prename descclassname">rraider.estimate.</code><code class="sig-name descname">volParkinson</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">highs</span></em>, <em class="sig-param"><span class="n">lows</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.estimate.volParkinson" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates the historical volatility for series using the Parkinson method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -172,8 +174,8 @@
 </dd></dl>
 
 <dl class="py function">
-<dt id="ttools.estimate.volVanilla">
-<code class="sig-prename descclassname">ttools.estimate.</code><code class="sig-name descname">volVanilla</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">close</span></em>, <em class="sig-param"><span class="n">ewm</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">halflife</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">60</span></em><span class="sig-paren">)</span><a class="headerlink" href="#ttools.estimate.volVanilla" title="Permalink to this definition">¶</a></dt>
+<dt id="rraider.estimate.volVanilla">
+<code class="sig-prename descclassname">rraider.estimate.</code><code class="sig-name descname">volVanilla</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">close</span></em>, <em class="sig-param"><span class="n">ewm</span><span class="p">:</span> <span class="n">bool</span> <span class="o">=</span> <span class="default_value">False</span></em>, <em class="sig-param"><span class="n">halflife</span><span class="p">:</span> <span class="n">float</span> <span class="o">=</span> <span class="default_value">60</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.estimate.volVanilla" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimates the historical volatility for series using the standard ‘close’ method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -202,7 +204,7 @@
         <a href="simulate.html" class="btn btn-neutral float-right" title="Simulate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral float-left" title="Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="data.html" class="btn btn-neutral float-left" title="Data" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
