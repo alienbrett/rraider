@@ -1,4 +1,0 @@
-
-'''
-Implies distributions from
-'''

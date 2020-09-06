@@ -1,0 +1,1 @@
+from .forecast.tests import *
