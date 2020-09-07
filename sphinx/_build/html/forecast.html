@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Forecast &mdash; rraider  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="static/documentation_options.js"></script>
+        <script src="static/jquery.js"></script>
+        <script src="static/underscore.js"></script>
+        <script src="static/doctools.js"></script>
+        <script src="static/language_data.js"></script>
+    
+    <script type="text/javascript" src="static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setting up" href="setup.html" />
+    <link rel="prev" title="Contents" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> rraider
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Forecast</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#quick-examples">Quick examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#base-class">Base class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#selecting-a-model">Selecting a model</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="setup.html">Setting up</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">rraider</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Forecast</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/forecast.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="forecast">
+<h1>Forecast<a class="headerlink" href="#forecast" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="quick-examples">
+<h2>Quick examples<a class="headerlink" href="#quick-examples" title="Permalink to this headline">¶</a></h2>
+<p>Multi-asset models can be used to model several securities and the
+correlation between them. For example, log-normal distributions distributed in the
+usual fashion can be modeled as such:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Current price of assets</span>
+<span class="c1"># Assume they have same price, for side-by-side comparison</span>
+<span class="n">price</span> <span class="o">=</span> <span class="mi">100</span>
+
+<span class="c1"># Anualized means of two different assets</span>
+<span class="n">means</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.06</span><span class="p">]</span>
+
+<span class="c1"># Anualized covariance/dispersion matrix</span>
+<span class="n">vol</span> <span class="o">=</span> <span class="p">[[</span><span class="mf">0.15</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.08</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.82</span><span class="p">]]</span>
+
+<span class="c1"># How many discrete time points to simulate for each T</span>
+<span class="c1"># For a single year, it might make sense to use 252, one unit for each trading day</span>
+<span class="c1"># Or for shorter intervals, sample several times a day (10, for example)</span>
+<span class="n">resolution</span> <span class="o">=</span> <span class="mi">252</span> <span class="o">*</span> <span class="mi">20</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">rraider</span><span class="o">.</span><span class="n">forecast</span><span class="o">.</span><span class="n">MultiLogBrownianModel</span><span class="p">(</span>
+    <span class="n">S0</span> <span class="o">=</span> <span class="n">price</span><span class="p">,</span>
+    <span class="n">mu</span> <span class="o">=</span> <span class="n">means</span><span class="p">,</span>
+    <span class="n">cov</span> <span class="o">=</span> <span class="n">vol</span><span class="p">,</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="n">resolution</span>
+<span class="p">)</span>
+<span class="c1"># Look 10 trading days out, about 2 weeks</span>
+<span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">horizon</span><span class="o">=</span><span class="mi">10</span><span class="o">/</span><span class="mf">252.0</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+<span class="c1"># Plot asset 1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="base-class">
+<h2>Base class<a class="headerlink" href="#base-class" title="Permalink to this headline">¶</a></h2>
+<p>Both derive from <code class="docutils literal notranslate"><span class="pre">AssetModel</span></code>, and all have the same
+<code class="docutils literal notranslate"><span class="pre">simulate</span></code> and <code class="docutils literal notranslate"><span class="pre">distribution</span></code> functions.</p>
+<dl class="py class">
+<dt id="rraider.forecast.AssetModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">AssetModel</code><a class="headerlink" href="#rraider.forecast.AssetModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base class from which all price models derive</p>
+<p>This class is used to standardize asset price assumptions,
+with methods to forecast prior assumptions into the future.</p>
+<p>In this way, after some features of a set of assets is estimated,
+models can create projected price distributions from monte carlo simulations.</p>
+<p>This might be useful in multi-asset baskets, where correlation between assets
+can make-or-break a set of trades.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="selecting-a-model">
+<h2>Selecting a model<a class="headerlink" href="#selecting-a-model" title="Permalink to this headline">¶</a></h2>
+<p>There are currently two types of asset models,</p>
+<ul class="simple">
+<li><p>Single-asset models</p></li>
+<li><p>Multi-asset models</p></li>
+</ul>
+<p>Brownian models</p>
+<dl class="py class">
+<dt id="rraider.forecast.BrownianModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">BrownianModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.BrownianModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.BrownianModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.BrownianModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates brownian asset motion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> – Position at t=0</p></li>
+<li><p><strong>mu</strong> – werner process drift, per T=1</p></li>
+<li><p><strong>sigma</strong> – werner process stdev, per T=1</p></li>
+<li><p><strong>N</strong> – simulation Resolution per unit of T</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="rraider.forecast.MultiBrownianModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">MultiBrownianModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">cov</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.MultiBrownianModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.MultiBrownianModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">cov</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.MultiBrownianModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates brownian asset motion on a universe of correlated assets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> – Vector of asset prices at t=0</p></li>
+<li><p><strong>mu</strong> – vector of werner process drifts, per T=1</p></li>
+<li><p><strong>cov</strong> – covariance matrix</p></li>
+<li><p><strong>N</strong> – simulation Resolution per unit of T</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>Log-normal Brownian models</p>
+<dl class="py class">
+<dt id="rraider.forecast.LogBrownianModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">LogBrownianModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.LogBrownianModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.LogBrownianModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">sigma</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.LogBrownianModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates brownian asset motion.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> – Position at t=0</p></li>
+<li><p><strong>mu</strong> – werner process drift, per T=1</p></li>
+<li><p><strong>sigma</strong> – werner process stdev, per T=1</p></li>
+<li><p><strong>N</strong> – simulation Resolution per unit of T</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="rraider.forecast.MultiLogBrownianModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">MultiLogBrownianModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">cov</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.MultiLogBrownianModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.MultiLogBrownianModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">S0</span></em>, <em class="sig-param"><span class="n">mu</span></em>, <em class="sig-param"><span class="n">cov</span></em>, <em class="sig-param"><span class="n">N</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.MultiLogBrownianModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates brownian asset motion on a universe of correlated assets</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>S0</strong> – Vector of asset prices at t=0</p></li>
+<li><p><strong>mu</strong> – vector of werner process drifts, per T=1</p></li>
+<li><p><strong>cov</strong> – covariance matrix</p></li>
+<li><p><strong>N</strong> – simulation Resolution per unit of T</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>Garch volatility model</p>
+<dl class="py class">
+<dt id="rraider.forecast.GarchModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">GarchModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">returns</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.GarchModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.GarchModel.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">returns</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.GarchModel.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates GARCH volatility model.</p>
+<p>See the documentation for <a class="reference external" href="https://arch.readthedocs.io/en/latest/api.html">ARCH package</a> for full arguments</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>returns</strong> – numpy array of prices</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup.html" class="btn btn-neutral float-right" title="Setting up" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Contents" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Brett Graves
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -23,7 +23,7 @@ help:
 github:
 	@make html
 	@rm _build/html/static -rf
-	@mv _build/html/_static _build/html/static
+	@cp _build/html/_static _build/html/static -r
 	@touch _build/html/.nojekyll
 	@find _build/html/ -type f -exec sed -i 's/_static/static/g' {} +
 	@cp -a _build/html/. ../docs

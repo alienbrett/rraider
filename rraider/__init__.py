@@ -38,4 +38,3 @@ Needed
 # from . import risk
 # from . import BlackScholes as bs
 from . import forecast
-from . import tests

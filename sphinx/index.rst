@@ -5,13 +5,8 @@ Contents
 .. toctree::
    :maxdepth: 2
 
-   data
-   estimate
-   simulate
-   portfolio
-   pricing
-   risk
-
+   forecast
+   setup
 
 
 Indices and tables

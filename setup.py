@@ -23,9 +23,12 @@ VERSION = '0.1.0'
 # What packages are required for this module to be executed?
 REQUIRED = [
 	'scipy>=1.5.2',
-	'yfinance',
+	'pandas_datareader>=0.9.0',
+	'arch>=4.15',
+	'statsmodels>=0.12.0',
 	'numpy',
 	'pandas',
+	'yfinance',
 	'joblib',
 	'beautifulsoup4',
 ]

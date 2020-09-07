@@ -1,6 +1,0 @@
-Simulation
-===========
-
-.. automodule:: rraider.simulate
-   :members:
-
