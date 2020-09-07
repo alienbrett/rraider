@@ -6,6 +6,7 @@ Contents
    :maxdepth: 2
 
    forecast
+   estimate
    setup
 
 

@@ -3,7 +3,6 @@ import pandas as pd
 
 __all__ = ['volParkinson', 'volVanilla']
 
-
     
     
 def difs ( close ):
@@ -21,7 +20,18 @@ def volParkinson ( highs, lows ):
 			numpy array or pandas series of daily low values
 
 	Returns:
-		Parkinson volatility estimate
+		float, Parkinson volatility estimate
+	
+
+	Example:
+
+	.. code-block:: python
+
+	   # Use the daily high's and low's
+	   v = rraider.estimate.volParkinson( highs = df['High'], lows  = df['Low'] )
+
+	   v
+	   # 0.42135
 	
     """
     
@@ -44,8 +54,17 @@ def volVanilla ( close, ewm:bool = False, halflife:float = 60 ):
 			float, rate parameter for ewm, if applicable
 
 	Returns:
-		Historical volatility estimate
+		float, Historical volatility estimate
 	
+
+	Example:
+
+	.. code-block:: python
+
+	   v = rraider.estimate.volVanilla( close = df['Close'], ewm = True, halflife = 25 )
+
+	   v
+	   # 0.389
     """
     x = pd.Series( difs(close), index=close.index)
     if ewm:
