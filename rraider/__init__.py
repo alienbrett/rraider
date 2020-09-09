@@ -34,7 +34,7 @@ Needed
 # from . import portfolio
 # from . import pricing
 # from . import simulate
-# from . import utils
 # from . import risk
-# from . import BlackScholes as bs
+from .black_scholes import BlackScholes as bs
 from . import forecast
+from . import utils

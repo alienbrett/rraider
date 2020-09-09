@@ -21,3 +21,17 @@ def mass_broadcast(*args):
 		xs[i] = np.broadcast_to(x, (l, 1))
 
 	return xs
+
+
+
+
+def derivApprox(x,y, n=1):
+	if n <= 0:
+		print("Sorry, can't do integrals!")
+		return x,y
+	elif n > 1:
+		x,y = derivApprox(x,y, n-1)
+
+	x1 = np.mean([x[1:], x[:-1]],axis=0)
+	dy1 = np.diff(y) / np.diff(x)
+	return x1, dy1
