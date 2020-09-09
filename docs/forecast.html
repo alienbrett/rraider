@@ -73,7 +73,81 @@ usual fashion can be modeled as such:</p>
 
 <span class="c1"># Plot asset 1</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The option chain can also be used to find a distribution</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sym</span> <span class="o">=</span> <span class="s1">&#39;SPY&#39;</span>
+<span class="n">typ</span> <span class="o">=</span> <span class="s1">&#39;call&#39;</span>
+
+<span class="c1"># fuck you J Powell</span>
+<span class="n">riskFree</span> <span class="o">=</span> <span class="mf">0.005</span>
+
+<span class="c1"># Current price</span>
+<span class="n">px</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">quote</span><span class="p">(</span><span class="n">sym</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;last&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">flatten</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Use your own date</span>
+<span class="n">query</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xdate-gte:20200911&#39;</span><span class="p">,</span><span class="s1">&#39;put_call-eq:{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">typ</span><span class="p">)]</span>
+
+<span class="c1"># I unabashedly rep my own PyAlly package</span>
+<span class="c1">#  Check it out at https://alienbrett.github.io/PyAlly/</span>
+<span class="n">ops</span> <span class="o">=</span> <span class="n">ally</span><span class="o">.</span><span class="n">Ally</span><span class="p">()</span><span class="o">.</span><span class="n">search</span><span class="p">(</span>
+   <span class="n">sym</span><span class="p">,</span>
+   <span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="p">,</span>
+   <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;strikeprice&#39;</span><span class="p">,</span><span class="s1">&#39;imp_Volatility&#39;</span><span class="p">,</span><span class="s1">&#39;bid&#39;</span><span class="p">,</span> <span class="s1">&#39;ask&#39;</span><span class="p">,</span> <span class="s1">&#39;days_to_expiration&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Generate the model</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">rraider</span><span class="o">.</span><span class="n">forecast</span><span class="o">.</span><span class="n">ImpliedOptionModel</span><span class="p">(</span>
+   <span class="c1"># Strike prices</span>
+   <span class="n">strikes</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;strikeprice&#39;</span><span class="p">],</span>
+
+   <span class="c1"># The natural implied volatility</span>
+   <span class="c1">#  This is fed to the smoother</span>
+   <span class="n">impVol</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;imp_Volatility&#39;</span><span class="p">],</span>
+
+   <span class="n">bid</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;bid&#39;</span><span class="p">],</span>
+   <span class="n">ask</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;ask&#39;</span><span class="p">],</span>
+
+   <span class="c1"># Are these calls or puts? this impacts</span>
+   <span class="c1"># option pricing later</span>
+   <span class="n">callput</span> <span class="o">=</span> <span class="n">typ</span><span class="p">,</span>
+
+   <span class="c1"># risk free rate</span>
+   <span class="n">irate</span> <span class="o">=</span> <span class="n">riskFree</span><span class="p">,</span>
+
+   <span class="c1"># Time, but it&#39;s wise to anualize it here</span>
+   <span class="n">time</span> <span class="o">=</span> <span class="n">ops</span><span class="p">[</span><span class="s1">&#39;days_to_expiration&#39;</span><span class="p">]</span><span class="o">/</span> <span class="mf">252.0</span><span class="p">,</span>
+
+   <span class="c1"># Current price</span>
+   <span class="n">spot</span> <span class="o">=</span> <span class="n">px</span><span class="p">,</span>
+
+   <span class="c1"># Use Gaussian 4.0-wide kernel to smooth strikes [Default]</span>
+   <span class="c1"># None uses default</span>
+   <span class="n">volSmoother</span> <span class="o">=</span> <span class="bp">None</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">scipy.ndimage</span>
+
+<span class="c1"># We can also customize the volatility smoother here</span>
+<span class="c1"># Any kernel or smoother function will do</span>
+<span class="n">m</span><span class="o">.</span><span class="n">setVolSmoother</span><span class="p">(</span>
+    <span class="k">lambda</span> <span class="n">vol</span><span class="p">:</span> <span class="n">scipy</span><span class="o">.</span><span class="n">ndimage</span><span class="o">.</span><span class="n">gaussian_filter1d</span> <span class="p">(</span> <span class="n">vol</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">4.0</span> <span class="p">)</span>
+<span class="p">)</span>
+
+
+<span class="c1"># Now we can display the distribution</span>
+<span class="c1">#  This is currently a little round-a-bout, but</span>
+<span class="c1">#  Hopefully will be cleaner in the future</span>
+
+<span class="c1"># Which time to consider</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+   <span class="n">m</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">times</span><span class="p">[</span><span class="n">n</span><span class="p">],</span> <span class="n">n</span><span class="o">=</span><span class="mi">1000</span><span class="p">,),</span>
+   <span class="n">bins</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span>
+   <span class="n">density</span><span class="o">=</span><span class="bp">True</span>
+<span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -202,6 +276,60 @@ can make-or-break a set of trades.</p>
 <dd class="field-odd"><p><strong>returns</strong> – numpy array of prices</p>
 </dd>
 </dl>
+</dd></dl>
+
+</dd></dl>
+
+<p>Implied Option model</p>
+<dl class="py class">
+<dt id="rraider.forecast.ImpliedOptionModel">
+<em class="property">class </em><code class="sig-prename descclassname">rraider.forecast.</code><code class="sig-name descname">ImpliedOptionModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">strikes</span></em>, <em class="sig-param"><span class="n">impVol</span></em>, <em class="sig-param"><span class="n">bid</span></em>, <em class="sig-param"><span class="n">ask</span></em>, <em class="sig-param"><span class="n">callput</span></em>, <em class="sig-param"><span class="n">time</span></em>, <em class="sig-param"><span class="n">irate</span></em>, <em class="sig-param"><span class="n">spot</span></em>, <em class="sig-param"><span class="n">volSmoother</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.ImpliedOptionModel" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py method">
+<dt id="rraider.forecast.ImpliedOptionModel.hypotheticalDist">
+<code class="sig-name descname">hypotheticalDist</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">horizon</span></em>, <em class="sig-param"><span class="n">vols</span></em>, <em class="sig-param"><span class="n">dividend_yield</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.ImpliedOptionModel.hypotheticalDist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the implied distribution at a given time</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>horizon</strong> – time to expiration, used to grab relevent option records</p></li>
+<li><p><strong>vols</strong> – hypothetical volumes used for pricing</p></li>
+<li><p><strong>dividend_yield</strong> – hypothetical anualized yield</p></li>
+</ul>
+</dd>
+</dl>
+<p>Returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="rraider.forecast.ImpliedOptionModel.setVolSmoother">
+<code class="sig-name descname">setVolSmoother</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">f</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.ImpliedOptionModel.setVolSmoother" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="rraider.forecast.ImpliedOptionModel.simulate">
+<code class="sig-name descname">simulate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">horizon</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">n</span><span class="p">:</span> <span class="n">int</span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#rraider.forecast.ImpliedOptionModel.simulate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulates future prices at some point in the future.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>horizon</strong> – periods in the future to estimate</p></li>
+<li><p><strong>n</strong> – number of trials</p></li>
+<li><p><strong>path</strong> – returns tuple (x,y) where x is the time index and y has shape (nSims, pathLength)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>tuple x,y if path is true, otherwise np array of shape (nSims,)</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">thisClass</span><span class="p">(</span><span class="n">S0</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">distribution</span><span class="p">(</span><span class="n">horizon</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Plot the data</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="mi">0</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

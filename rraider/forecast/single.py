@@ -160,6 +160,8 @@ class LogBrownianModel (BrownianModel):
 		else:
 			return y[:,-1]
 
+
+
 	def distribution(self, *args, **kwargs ):
 		super().distribution(*args, **kwargs)
 

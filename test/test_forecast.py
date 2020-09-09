@@ -2,8 +2,10 @@ import unittest
 
 from rraider.forecast.multi import *
 from rraider.forecast.single import *
+from rraider.forecast.options import *
 
 import pandas_datareader.data as web
+import pandas as pd
 
 
 class TestSingle(unittest.TestCase):
@@ -38,8 +40,8 @@ class TestSingle(unittest.TestCase):
 
 
 
-	def test_logbrownian_shape(self):
-		'''Test the shape of brownian outputs
+	def test_garch_shape(self):
+		'''Test the shape of garch outputs
 		'''
 
 		import warnings
@@ -55,6 +57,50 @@ class TestSingle(unittest.TestCase):
 
 		y = m.simulate ( 10, 99, path=False )
 		self.assertEqual ( y.shape, (99,) )
+
+
+
+
+	def test_logbrownian_shape(self):
+		'''Test the shape of brownian outputs
+		'''
+		import warnings
+		warnings.filterwarnings('ignore')
+
+		ops = pd.read_csv('test/data/USO_call_chain.csv')
+
+
+		# Create a model with starting val 100, mean 0.01, sigma 0.2, and 50 resolution
+		m = ImpliedOptionModel(
+			# Strike prices
+			strikes = ops['strikeprice'],
+
+			# The natural implied volatility
+			#  This is fed to the smoother
+			impVol = ops['imp_Volatility'],
+
+			bid = ops['bid'],
+			ask = ops['ask'],
+
+			# Are these calls or puts? this impacts
+			# option pricing later
+			callput = 'call',
+
+			# risk free rate
+			irate = 0.01,
+
+			# Time, but it's wise to anualize it here
+			time = ops['days_to_expiration']/ 252.0,
+
+			# Current price
+			spot = 27.5,
+		)
+
+		t = m.times[1]
+
+		y = m.simulate ( t, 99 )
+		self.assertEqual ( y.shape, (99,) )
+
 
 
 

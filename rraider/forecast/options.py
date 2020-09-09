@@ -2,8 +2,11 @@ from .single import AssetModel
 from ..utils import *
 import numpy as np
 import pandas as pd
+from .. import bs
 
 import scipy.interpolate
+import scipy.integrate
+from scipy.ndimage import gaussian_filter1d
 
 
 
@@ -19,7 +22,7 @@ class ImpliedOptionModel (AssetModel):
 
 	dayCount = 252
 
-	def __init__(self, strikes, impVol, bid, ask, callput, time, irate, spot ):
+	def __init__(self, strikes, impVol, bid, ask, callput, time, irate, spot, volSmoother=None ):
 		'''Initializes the implied option model.
 
 		Arguments:
@@ -58,44 +61,58 @@ class ImpliedOptionModel (AssetModel):
 		self.strikes = sorted(list(set(self.df['strike'].values)))
 		self.times = sorted(list(set(self.df['t'].values)))
 
-
-
-
-
-	def volF (self, s, t):
-		'''Evaluate volatility for a specific day
-
-		 use only that day to compute values
-		'''
-		dx = self.df.loc[ self.df['t'] == t ]
-		if len(dx) > 0:
-
-			
-			# f = scipy.interpolate.UnivariateSpline(
-			# 	dx['strike'],
-			# 	dx['imp_vol'],
-			# )
-			f = np.poly1d(
-				np.polyfit(
-					dx['strike'],
-					dx['imp_vol'],
-					deg=25
-				)
+		if volSmoother is not None:
+			self.setVolSmoother(volSmoother)
+		else:
+			self.setVolSmoother(
+			   lambda vol: scipy.ndimage.gaussian_filter1d ( vol, sigma=4.0 )
 			)
 
-			return f(s)
 
-
-		else:
-			return None
-
-	
-	def distribution (self, horizon, d=2):
-		'''Finds the implied distribution at a given time
-
+	def setVolSmoother(self, f):
 		'''
-		pass
+		'''
+		self._vf = f
 
+
+
+	def _timePoint(self, t):
+		return self.df.loc[ self.df['t'] == t ].sort_values('strike')
+	
+
+
+	def simulate(self, horizon = 1, n:int = None):
+		x, cumProb = self._cdf ( horizon )
+
+		percentiles = np.random.uniform(size=n)
+		# print(percentiles)
+		f = scipy.interpolate.interp1d(
+			cumProb,
+			x
+		)
+		strikes = f(percentiles)
+		return strikes
+
+
+
+	def _cdf(self, horizon, dividend_yield=0):
+
+
+		dx = self._timePoint(horizon)
+
+		x, prob = self.hypotheticalDist(
+			horizon,
+			self._vf ( dx['imp_vol'] ),
+		)
+
+		cumProb = scipy.integrate.cumtrapz (
+			prob, x, initial=0
+		)
+
+		return x, cumProb
+
+
+		
 
 
 	def hypotheticalDist (self, horizon, vols, dividend_yield=0):
@@ -112,12 +129,12 @@ class ImpliedOptionModel (AssetModel):
 		Returns:
 
 		'''
-		from .. import bs
+		import scipy.integrate
 
-		dx = self.df.loc[ self.df['t'] == horizon ]
+		dx = self._timePoint(horizon)
 
 		# Calculate the implied 
-		c, _ = bs.BlackScholes(
+		yhat, _ = bs.BlackScholes(
 			spot_price = self.px,
 			strike_price = dx['strike'],
 			time_to_maturity = dx['t'],
@@ -126,8 +143,8 @@ class ImpliedOptionModel (AssetModel):
 			dividend_yield = dividend_yield,
 		).european_option_price()
 
-		# Get the relevent info
-		x, yhat = dx['strike'], c
+		# Name change
+		x = dx['strike']
 
 		# Get the second derivatives
 		x2, dy2 = derivApprox(
@@ -152,12 +169,14 @@ class ImpliedOptionModel (AssetModel):
 			lambda y: y >= 0,
 			x2, dy2
 		)
+		# print(x2.shape)
+		# print(dy2.shape)
 
-		# This converts second derivative into
-		# the PDF
-		modifier = np.exp(self.r * horizon)
+		total = scipy.integrate.trapz( dy2, x=x2 )
+		# print(total)
+		dy2 = dy2 / total
 
-		return (x2, modifier * dy2)
+		return (x2, dy2)
 
 
 	
